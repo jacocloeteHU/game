@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FeedbackCreator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">game</a> &gt; <a href="index.source.html" class="el_package">lingo.game.application.gameplay</a> &gt; <span class="el_source">FeedbackCreator.java</span></div><h1>FeedbackCreator.java</h1><pre class="source lang-java linenums">package lingo.game.application.gameplay;
+
+import lingo.game.domain.model.Feedback;
+import lingo.game.domain.model.Word;
+import lingo.game.domain.services.IFeedbackService;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+<span class="fc" id="L10">public class FeedbackCreator implements IFeedbackCreator {</span>
+    @Override
+    public Feedback evolveWord(Word roundWord, String wordParts, String playersWord) throws IOException, URISyntaxException {
+<span class="fc" id="L13">        Feedback feedback = new Feedback();</span>
+<span class="fc" id="L14">        IWordValidator wordValidator = new WordValidator();</span>
+<span class="fc" id="L15">        boolean validWord = wordValidator.evaluateWord(playersWord);</span>
+<span class="fc" id="L16">        boolean correctWord = wordCorrectCheck(roundWord, playersWord);</span>
+<span class="fc bfc" id="L17" title="All 6 branches covered.">        if((validWord) &amp;&amp; (validPartsCheck(wordParts, playersWord)) &amp;&amp; (validLengthCheck(roundWord.getWord(), playersWord))){</span>
+<span class="fc" id="L18">            feedback = absentOrPresentCheck(roundWord, playersWord);</span>
+        } else {
+<span class="fc" id="L20">            feedback = invalidFeedback(playersWord);</span>
+        }
+
+<span class="fc" id="L23">        feedback.setWordValidState(correctWord);</span>
+<span class="fc" id="L24">        System.out.println(feedback.toString());</span>
+<span class="fc" id="L25">        return feedback;</span>
+    }
+
+    private Feedback absentOrPresentCheck(Word roundWord, String playersWord){
+<span class="fc" id="L29">        Feedback feedback = new Feedback();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        for(int i =0; i &lt; playersWord.length(); i++) {</span>
+<span class="fc" id="L31">            char charPlayer = playersWord.charAt(i);</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            if(roundWord.getWord().charAt(i) == charPlayer) {</span>
+<span class="fc" id="L33">                feedback.addFeedback(charPlayer, feedback.CORRECT);</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            } else if(roundWord.getWord().contains(Character.toString(charPlayer))) {</span>
+<span class="fc" id="L35">                feedback.addFeedback(charPlayer, feedback.PRESENT);</span>
+            } else {
+<span class="fc" id="L37">                feedback.addFeedback(charPlayer, feedback.ABSENT);</span>
+            }
+        }
+<span class="fc" id="L40">        return feedback;</span>
+    }
+
+    private Feedback invalidFeedback(String playersWord){
+<span class="fc" id="L44">        Feedback feedback = new Feedback();</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        for(int i = 0; i &lt; playersWord.length(); i++){</span>
+<span class="fc" id="L46">            feedback.addFeedback(playersWord.charAt(i), feedback.INVALID);</span>
+        }
+<span class="fc" id="L48">        return feedback;</span>
+    }
+
+    private boolean validPartsCheck(String givenPart, String playersWord){
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        for(int i = 0; i &lt; givenPart.length(); i++){</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            if(givenPart.charAt(i) != playersWord.charAt(i)) {</span>
+<span class="fc" id="L54">                return false;</span>
+            }
+        }
+<span class="fc" id="L57">        return true;</span>
+    }
+
+    private boolean validLengthCheck(String roundWord, String playersWord){
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        if(roundWord.length() == playersWord.length()){</span>
+<span class="fc" id="L62">            return true;</span>
+        }
+<span class="fc" id="L64">        return false;</span>
+    }
+
+    private boolean wordCorrectCheck(Word roundWord, String playersWord){
+<span class="fc" id="L68">        return roundWord.getWord().equals(playersWord);</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

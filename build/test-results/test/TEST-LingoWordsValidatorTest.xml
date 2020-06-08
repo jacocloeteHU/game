@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="LingoWordsValidatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-06-08T10:31:15" hostname="DESKTOP-HTP4CB3" time="0.469">
+<testsuite name="LingoWordsValidatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2020-06-08T17:09:24" hostname="DESKTOP-HTP4CB3" time="0.351">
   <properties/>
-  <testcase name="WordInValidTest()" classname="LingoWordsValidatorTest" time="0.001"/>
-  <testcase name="WordValidTest()" classname="LingoWordsValidatorTest" time="0.467"/>
+  <testcase name="WordInValidTest()" classname="LingoWordsValidatorTest" time="0.0"/>
+  <testcase name="WordValidTest()" classname="LingoWordsValidatorTest" time="0.351"/>
   <system-out><![CDATA[aanzien : true
 email : true
 smeer : true

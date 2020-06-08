@@ -16,8 +16,9 @@ public class Game {
         rounds.add(round);
     }
 
-    public void addScore(int score){
-        this.score += score;
+    public void addScore(int turns){
+        turns = turns-1;
+        this.score = (5 - turns) * 10;
     }
 
     public void start(){

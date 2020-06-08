@@ -1,45 +1,54 @@
-import lingo.game.domain.model.IWordSource;
+import lingo.game.application.gameplay.IFeedbackCreator;
+import lingo.game.application.gameplay.FeedbackCreator;
 import lingo.game.domain.model.Word;
-import lingo.game.domain.services.FeedbackService;
-import lingo.game.domain.services.IFeedbackService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class LingoWordsFeedbackTest {
     @Autowired
-    private IFeedbackService feedbackService;
+    private IFeedbackCreator feedbackCreator;
     public LingoWordsFeedbackTest() {
-        feedbackService = new FeedbackService();
+        feedbackCreator = new FeedbackCreator() {
+        };
     }
 
-    @Test
+/*    @Test
     @DisplayName("Feedback valid check testing")
     public void WordValidTest()  {
-        Assertions.assertTrue(feedbackService.validCheck("BA", "BARTJE"));
-        Assertions.assertTrue(feedbackService.validCheck("B", "BERTJE"));
-        Assertions.assertFalse(feedbackService.validCheck("BA", "BERTJE"));
-        Assertions.assertFalse(feedbackService.validCheck("BA", "KERTJE"));
-        Assertions.assertFalse(feedbackService.validCheck("BA", "KARTJE"));
-        Assertions.assertFalse(feedbackService.validCheck("BA", "KARTJE"));
+        Assertions.assertTrue(feedbackCreator.validCheck("BA", "BARTJE"));
+        Assertions.assertTrue(feedbackCreator.validCheck("B", "BERTJE"));
+        Assertions.assertFalse(feedbackCreator.validCheck("BA", "BERTJE"));
+        Assertions.assertFalse(feedbackCreator.validCheck("BA", "KERTJE"));
+        Assertions.assertFalse(feedbackCreator.validCheck("BA", "KARTJE"));
+        Assertions.assertFalse(feedbackCreator.validCheck("BA", "KARTJE"));
+    }*/
+
+    @Test
+    @DisplayName("Feedback valid check testing")
+    public void WordPresentAndAbsentTest() throws IOException, URISyntaxException {
+        Word word = new Word("barend");
+        feedbackCreator.evolveWord(word, "ba", "bartje");
+        feedbackCreator.evolveWord(word, "ba", "barend");
+        feedbackCreator.evolveWord(word, "ba", "kareje");
+        feedbackCreator.evolveWord(word, "ba", "artje");
+        feedbackCreator.evolveWord(word, "ba", "bartjess");
+        feedbackCreator.evolveWord(word, "ba", "bartje");
+
+
     }
 
     @Test
     @DisplayName("Feedback valid check testing")
-    public void WordPresentAndAbsentTest()  {
-        Word word = new Word("barend");
-        feedbackService.evolveWord(word, "ba", "bartje");
-        feedbackService.evolveWord(word, "ba", "barend");
-        feedbackService.evolveWord(word, "ba", "kareje");
-        feedbackService.evolveWord(word, "ba", "artje");
-        feedbackService.evolveWord(word, "ba", "bartjess");
-        feedbackService.evolveWord(word, "ba", "bartje");
-
+    public void WordPresentAndAbsent2Test() throws IOException, URISyntaxException {
+        Word word = new Word("aanzien");
+        feedbackCreator.evolveWord(word, "aa", "aanvang");
+        feedbackCreator.evolveWord(word, "aan", "aanzoek");
+        feedbackCreator.evolveWord(word, "aan", "aanvoer");
 
     }
 

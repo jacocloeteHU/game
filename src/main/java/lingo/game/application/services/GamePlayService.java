@@ -1,27 +1,37 @@
 package lingo.game.application.services;
 
+import lingo.game.application.gameplay.IWordValidator;
+import lingo.game.application.gameplay.WordValidator;
 import lingo.game.domain.model.Game;
 import lingo.game.domain.model.Round;
+import lingo.game.domain.model.Word;
 import lingo.game.domain.services.IGameService;
 import lingo.game.domain.services.IRoundService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-@Service
-public class GamePlayService {
+@Component
+public class GamePlayService implements IGamePlayService {
     @Autowired
     IGameService gameService;
     @Autowired
     IRoundService roundService;
-
+    @Autowired TurnService turnService;
+    @Autowired
+    WordSourceService wordSourceService;
     public GamePlayService(){
 
     }
 
-    public boolean start() throws IOException, URISyntaxException {
-        Round round = roundService.createRound(10, 5);
+    public boolean startWithRandomWord() throws IOException, URISyntaxException {
+        return start(wordSourceService.generateNewWord());
+    }
+
+    public boolean start(Word word) throws IOException, URISyntaxException {
+        Round round = roundService.createRound(10, 5, word);
         gameService.start(round);
         return true;
     }
@@ -37,23 +47,44 @@ public class GamePlayService {
         System.out.println("Game word parts:" + gameService.getGame().getCurrentRound().getWordParts());
     }
 
-    public void guessWord(String playersWord) throws IOException, URISyntaxException {
+    // vanuit round kun je meer showen dus ook feedback
+    public Round guessWord(String playersWord) throws IOException, URISyntaxException {
+        IWordValidator wordValidator = new WordValidator();
         int roundSize = gameService.getGame().getRounds().size();
         Round currentRound =gameService.getGame().getCurrentRound();
-        Round round = roundService.evaluateGuessedWord(currentRound, playersWord);
-        boolean wordCorrect = round.getFeedback().isWordValidState();
+        boolean wordCorrect = false;
+        currentRound = turnService.evaluateGuessedWord(currentRound, playersWord);
+        wordCorrect = currentRound.getFeedback().isWordValidState();
+
         checkRoundState(wordCorrect);
+        return currentRound;
     }
 
     private void checkRoundState(boolean wordCorrect) throws IOException, URISyntaxException {
+        int turn = gameService.getGame().getCurrentRound().getTurn();
         if(wordCorrect == true){
-            Round round = roundService.createRound(10, 5);
+            Round round = roundService.createRound( 10, 5, wordSourceService.generateNewWord());
+            gameService.getGame().addScore(turn);
             Game game = gameService.nextRound(round);
         } else {
-            gameService.getGame().getCurrentRound().nextTurn();
+            if(turn == 5){
+                start(wordSourceService.generateNewWord());
+            } else {
+                gameService.getGame().getCurrentRound().nextTurn();
+            }
+
         }
-        printCurrentGame();
+        //printCurrentGame();
     }
+
+/*    public Round evaluateGuessedWord(Round round, String guessWord){
+        Word word = round.getWord();
+        IFeedbackCreator feedbackCreator = new TurnFeedback();
+        Feedback feedback = feedbackCreator.evolveWord(word, round.getWordParts(), guessWord);
+        round.setFeedback(feedback);
+        return round;
+        //  return round.getWord().equals(guessWord);
+    }*/
 
     public void PrintHighscore(){
 

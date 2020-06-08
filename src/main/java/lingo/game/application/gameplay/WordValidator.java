@@ -18,7 +18,7 @@ public class WordValidator implements IWordValidator {
         }
     }
 
-    private boolean realWordCheck(String word) throws IOException, URISyntaxException {
+    public boolean realWordCheck(String word) throws IOException, URISyntaxException {
         IWordSource wordSource = new ApiWordSource("https://lingo-words.herokuapp.com");
         boolean validWord = wordSource.checkWord(word);
         return validWord;

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public interface IRoundService {
-    public Round createRound(int timer, int turns ) throws IOException, URISyntaxException;
+    public Round createRound(int timer, int turns, Word word) throws IOException, URISyntaxException;
     public boolean roundStatus();
-    public Round evaluateGuessedWord(Round round, String guessWord);
 }

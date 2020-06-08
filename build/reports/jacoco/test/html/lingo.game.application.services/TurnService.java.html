@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TurnService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">game</a> &gt; <a href="index.source.html" class="el_package">lingo.game.application.services</a> &gt; <span class="el_source">TurnService.java</span></div><h1>TurnService.java</h1><pre class="source lang-java linenums">package lingo.game.application.services;
+
+import lingo.game.application.gameplay.IFeedbackCreator;
+import lingo.game.application.gameplay.FeedbackCreator;
+import lingo.game.domain.model.Feedback;
+import lingo.game.domain.model.Round;
+import lingo.game.domain.model.Word;
+import lingo.game.domain.services.IFeedbackService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+
+@Component
+<span class="fc" id="L16">public class TurnService {</span>
+    @Autowired
+    IFeedbackService feedbackService;
+    public Round evaluateGuessedWord(Round round, String guessWord) throws IOException, URISyntaxException {
+<span class="fc" id="L20">        Word word = round.getWord();</span>
+<span class="fc" id="L21">        IFeedbackCreator feedbackCreator = new FeedbackCreator();</span>
+<span class="fc" id="L22">        Feedback feedback = feedbackCreator.evolveWord(word, round.getWordParts(), guessWord);</span>
+<span class="fc" id="L23">        round.setFeedback(feedback);</span>
+<span class="fc" id="L24">        return round;</span>
+        //  return round.getWord().equals(guessWord);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

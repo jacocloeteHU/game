@@ -19,18 +19,8 @@ public class RoundService implements IRoundService {
 
     }
     @Override
-    public Round createRound(int timer, int turns) throws IOException, URISyntaxException {
-        IWordSource wordSource = new ApiWordSource("https://lingo-words.herokuapp.com");
-        Word newWord = wordSource.ReadWord(5);
+    public Round createRound(int timer, int turns, Word newWord) throws IOException, URISyntaxException {
         return new Round(newWord, timer);
-    }
-
-    public Round evaluateGuessedWord(Round round, String guessWord){
-        Word word = round.getWord();
-        feedbackService.evolveWord(word, round.getWordParts(), guessWord);
-
-        return round;
-      //  return round.getWord().equals(guessWord);
     }
 
     @Override
