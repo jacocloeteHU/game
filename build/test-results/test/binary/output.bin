@@ -1,0 +1,15 @@
+18462
+word [Length=5, Word=goden]
+word [Length=7, Word=takelen]
+aanzien : true
+Aanzien : false
+aanzien1 : false
+aan : false
+3275
+	KFeedback [b correct, a correct, r correct, t absent, j absent, e present]
+	Feedback []
+	MFeedback [k invalid, a invalid, r invalid, e invalid, j invalid, e invalid]
+	BFeedback [a invalid, r invalid, t invalid, j invalid, e invalid]
+aanzien : true
+email : true
+smeer : true

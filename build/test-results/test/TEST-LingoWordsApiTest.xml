@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="LingoWordsApiTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2020-06-08T10:31:10" hostname="DESKTOP-HTP4CB3" time="5.67">
+  <properties/>
+  <testcase name="WordsApiTest()" classname="LingoWordsApiTest" time="4.397"/>
+  <testcase name="WordLengthApiTest()" classname="LingoWordsApiTest" time="0.238"/>
+  <testcase name="WordApiTest()" classname="LingoWordsApiTest" time="0.162"/>
+  <testcase name="WordPresentAndAbsentTest()" classname="LingoWordsApiTest" time="0.625"/>
+  <testcase name="WordsLengthApiTest()" classname="LingoWordsApiTest" time="0.243"/>
+  <system-out><![CDATA[18462
+word [Length=5, Word=goden]
+word [Length=7, Word=takelen]
+aanzien : true
+Aanzien : false
+aanzien1 : false
+aan : false
+3275
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
