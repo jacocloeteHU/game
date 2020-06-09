@@ -3,10 +3,7 @@ package lingo.game.infrastructure.api;
 import lingo.game.application.services.GamePlayService;
 import lingo.game.application.services.IGamePlayService;
 import lingo.game.domain.model.Game;
-import lingo.game.domain.model.Round;
-import netscape.javascript.JSObject;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -18,7 +15,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-@Controller
+@RestController
 public class GameController {
     @Autowired
     IGamePlayService gamePlayService;
