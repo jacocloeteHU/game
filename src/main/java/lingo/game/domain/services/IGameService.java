@@ -6,8 +6,8 @@ import lingo.game.domain.model.Round;
 public interface IGameService {
 
 
-    public void start(Round round);
-    public Game getGame();
-    public Game nextRound(Round round);
+    public Game start(Round round);
+    public Game findGame(Game game);
+    public Game nextRound(Game game, Round round);
     public void stop();
 }

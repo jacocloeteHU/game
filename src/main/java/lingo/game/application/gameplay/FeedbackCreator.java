@@ -6,15 +6,16 @@ import lingo.game.domain.services.IFeedbackService;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 public class FeedbackCreator implements IFeedbackCreator {
     @Override
-    public Feedback evolveWord(Word roundWord, String wordParts, String playersWord) throws IOException, URISyntaxException {
+    public Feedback evolveWord(Word roundWord, ArrayList<Integer> wordPartsIndex, String playersWord) throws IOException, URISyntaxException {
         Feedback feedback = new Feedback();
         IWordValidator wordValidator = new WordValidator();
         boolean validWord = wordValidator.evaluateWord(playersWord);
         boolean correctWord = wordCorrectCheck(roundWord, playersWord);
-        if((validWord) && (validPartsCheck(wordParts, playersWord)) && (validLengthCheck(roundWord.getWord(), playersWord))){
+        if((validWord) && (validPartsCheck(wordPartsIndex, roundWord.getWord(), playersWord)) && (validLengthCheck(roundWord.getWord(), playersWord))){
             feedback = absentOrPresentCheck(roundWord, playersWord);
         } else {
             feedback = invalidFeedback(playersWord);
@@ -31,6 +32,7 @@ public class FeedbackCreator implements IFeedbackCreator {
             char charPlayer = playersWord.charAt(i);
             if(roundWord.getWord().charAt(i) == charPlayer) {
                 feedback.addFeedback(charPlayer, feedback.CORRECT);
+                feedback.addCorrectLettersIndex(i);
             } else if(roundWord.getWord().contains(Character.toString(charPlayer))) {
                 feedback.addFeedback(charPlayer, feedback.PRESENT);
             } else {
@@ -48,9 +50,9 @@ public class FeedbackCreator implements IFeedbackCreator {
         return feedback;
     }
 
-    private boolean validPartsCheck(String givenPart, String playersWord){
-        for(int i = 0; i < givenPart.length(); i++){
-            if(givenPart.charAt(i) != playersWord.charAt(i)) {
+    private boolean validPartsCheck(ArrayList<Integer> givenPart, String roundWord, String playersWord){
+        for(int i : givenPart){
+            if(roundWord.charAt(i) != playersWord.charAt(i)) {
                 return false;
             }
         }

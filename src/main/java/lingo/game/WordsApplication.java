@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import lingo.game.application.services.GamePlayService;
+import lingo.game.domain.model.Game;
 import lingo.game.domain.model.IWordSource;
 import lingo.game.infrastructure.source.ApiWordSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,11 @@ public class WordsApplication implements CommandLineRunner {
         api.ReadWord(5);
         api.ReadWords();
         api.ReadWords(5);
-        GamePlayService.startWithRandomWord();
-        GamePlayService.printCurrentGame();
-        GamePlayService.guessWord("peanut");
-        GamePlayService.printCurrentGame();
+        Game game = GamePlayService.startWithRandomWord();
+        String gameKey = game.getGameKey();
+        System.out.println(gameKey);
+      //  GamePlayService.printCurrentGame(gameKey);
+        GamePlayService.guessWord(gameKey,"peanut");
+      //  GamePlayService.printCurrentGame(gameKey);
     }
 }
