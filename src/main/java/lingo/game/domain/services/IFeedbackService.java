@@ -9,6 +9,6 @@ import java.util.ArrayList;
 public interface IFeedbackService {
     void addFeedback(Feedback feedback, char c, String feedbackType);
     public Feedback getFeedback(Feedback feedback);
-    public void PrintFeedback(Feedback feedback);
+    public void printFeedback(Feedback feedback);
 
 }

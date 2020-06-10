@@ -33,7 +33,7 @@ public class LingoWordsValidatorTest {
     @DisplayName("not valid word testing")
     public void WordInValidTest() throws IOException, URISyntaxException {
         Assertions.assertEquals(false ,wordValidator.evaluateWord("Aanzien"));
-        Assertions.assertEquals(false,wordValidator.evaluateWord("aanzien1"));
+        Assertions.assertEquals(false ,wordValidator.evaluateWord("aanzien1"));
         Assertions.assertEquals(false ,wordValidator.evaluateWord("aan"));
         Assertions.assertEquals(false ,wordValidator.evaluateWord("aan-zien"));
         Assertions.assertEquals(false ,wordValidator.evaluateWord("e-mail"));

@@ -21,28 +21,28 @@ public class LingoWordsApiTest {
     @Test
     @DisplayName("Words Api testing")
     public void WordsApiTest() throws IOException, URISyntaxException {
-        ArrayList<Word> words = api.ReadWords();
+        ArrayList<Word> words = api.readWords();
         Assert.notNull(words);
     }
 
     @Test
     @DisplayName("Words Api testing with length")
     public void WordsLengthApiTest() throws IOException, URISyntaxException {
-        ArrayList<Word> words = api.ReadWords(5);
+        ArrayList<Word> words = api.readWords(5);
         Assert.notNull(words);
     }
 
     @Test
     @DisplayName("Word Api testing")
     public void WordApiTest() throws IOException, URISyntaxException {
-        Word word = api.ReadWord();
+        Word word = api.readWord();
         Assert.notNull(word);
     }
 
     @Test
     @DisplayName("Word Api testing with length")
     public void WordLengthApiTest() throws IOException, URISyntaxException {
-        Word word = api.ReadWord(5);
+        Word word = api.readWord(5);
         Assert.notNull(word);
     }
 

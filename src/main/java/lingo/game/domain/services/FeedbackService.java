@@ -19,7 +19,7 @@ public class FeedbackService implements IFeedbackService {
     }
 
     @Override
-    public void PrintFeedback(Feedback feedback) {
+    public void printFeedback(Feedback feedback) {
         System.out.println(feedback.toString());
     }
 

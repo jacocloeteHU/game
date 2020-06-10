@@ -32,7 +32,7 @@ public class ApiWordSource implements IWordSource {
     }
 
     @Override
-    public ArrayList<Word> ReadWords() throws IOException, URISyntaxException {
+    public ArrayList<Word> readWords() throws IOException, URISyntaxException {
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
         WebTarget target = client.target(getBaseURI());
@@ -43,7 +43,7 @@ public class ApiWordSource implements IWordSource {
     }
 
     @Override
-    public ArrayList<Word> ReadWords(int length) throws IOException, URISyntaxException {
+    public ArrayList<Word> readWords(int length) throws IOException, URISyntaxException {
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
         WebTarget target = client.target(getBaseURI());
@@ -55,7 +55,7 @@ public class ApiWordSource implements IWordSource {
     }
 
     @Override
-    public Word ReadWord() throws IOException, URISyntaxException {
+    public Word readWord() throws IOException, URISyntaxException {
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
         WebTarget target = client.target(getBaseURI());
@@ -66,7 +66,7 @@ public class ApiWordSource implements IWordSource {
     }
 
     @Override
-    public Word ReadWord(int length) throws IOException, URISyntaxException {
+    public Word readWord(int length) throws IOException, URISyntaxException {
         ClientConfig config = new ClientConfig();
         Client client = ClientBuilder.newClient(config);
         WebTarget target = client.target(getBaseURI());

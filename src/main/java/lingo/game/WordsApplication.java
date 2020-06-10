@@ -34,10 +34,10 @@ public class WordsApplication implements CommandLineRunner {
     public void run(String... args) throws IOException, URISyntaxException {
         System.out.println("Initsialize word game");
         IWordSource api = new ApiWordSource("https://lingo-words.herokuapp.com");
-        api.ReadWord();
-        api.ReadWord(5);
-        api.ReadWords();
-        api.ReadWords(5);
+        api.readWord();
+        api.readWord(5);
+        api.readWords();
+        api.readWords(5);
         Game game = GamePlayService.startWithRandomWord();
         String gameKey = game.getGameKey();
         System.out.println(gameKey);

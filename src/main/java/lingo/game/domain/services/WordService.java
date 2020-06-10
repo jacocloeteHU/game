@@ -12,11 +12,11 @@ public class WordService implements IWordService {
         this.WordList = new ArrayList<Word>();
     }
 
-    public ArrayList<Word> GetAll(){
+    public ArrayList<Word> getAll(){
         return this.WordList;
     }
 
-    public void AddList(ArrayList<Word> words) {
+    public void addList(ArrayList<Word> words) {
 
         this.WordList.addAll(words);
 /*		for(Word word : words) {
@@ -32,7 +32,7 @@ public class WordService implements IWordService {
 		return this.WordList.remove(word);
 	}*/
 
-    public void Clear() {
+    public void clear() {
         WordList.clear();
     }
 }
