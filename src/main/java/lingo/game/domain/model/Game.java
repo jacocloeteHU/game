@@ -53,7 +53,6 @@ public class Game {
 
     public void addScore(int turns){
         addWordLength();
-        turns = turns;
         this.score += (5 - turns) * 10;
     }
 

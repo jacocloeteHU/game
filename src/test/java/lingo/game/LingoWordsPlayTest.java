@@ -1,3 +1,4 @@
+/*
 package lingo.game;
 
 import lingo.game.WordsApplication;
@@ -80,13 +81,15 @@ public class LingoWordsPlayTest {
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steueeereee").getFeedback().isWordValidState());
      //   GamePlayService.printCurrentGame(gameKey);
     }
+*/
 /*    @Test
     @DisplayName("Game Init test")
     public void initsializeTest() throws IOException, URISyntaxException {
         Word newWord = new Word("steur");
         Assertions.assertTrue(GamePlayService.start(newWord));
         GamePlayService.printCurrentGame();
-    }*/
+    }*//*
 
 
-}
+
+}*/
