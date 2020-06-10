@@ -7,10 +7,12 @@ public class Game {
     private Round round;
     private boolean active;
     private String gameKey;
+    private int wordLength;
     private int score;
 
     public Game() {
   //      rounds = new ArrayList<Round>();
+        wordLength = 5;
         score = 0;
     }
 
@@ -33,7 +35,24 @@ public class Game {
         this.round = round;
     }
 
+    public int getWordLength(){
+        return wordLength;
+    }
+
+    public void reset(){
+        this.wordLength = 5;
+        this.score = 0;
+    }
+
+    private void addWordLength(){
+        if(wordLength < 7){
+            wordLength++;
+        }
+        wordLength = 5;
+    }
+
     public void addScore(int turns){
+        addWordLength();
         turns = turns;
         this.score += (5 - turns) * 10;
     }

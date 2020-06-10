@@ -43,7 +43,7 @@ public class LingoWordsPlayTest {
         Game game = GamePlayService.start(newWord);
         gameKey = game.getGameKey();
         Assertions.assertTrue(true);
-        GamePlayService.printCurrentGame(gameKey);
+      //  GamePlayService.printCurrentGame(gameKey);
     }
 
 
@@ -51,34 +51,34 @@ public class LingoWordsPlayTest {
     @DisplayName("Game play test")
     public void playTest() throws IOException, URISyntaxException {
         System.out.println(this.gameKey);
-        GamePlayService.printCurrentGame(gameKey);
+    //    GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steur").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+     //   GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steuren").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+     //   GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steu").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+    //    GamePlayService.printCurrentGame(gameKey);
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steun").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+     //   GamePlayService.printCurrentGame(gameKey);
 
         playnegativeTest();
     }
 
     @DisplayName("Game play test")
     public void playnegativeTest() throws IOException, URISyntaxException {
-        GamePlayService.printCurrentGame(gameKey);
+     //   GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steur").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+     //   GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steuren").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+    //    GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steu").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+      //  GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steue").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+      //  GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steueee").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+      //  GamePlayService.printCurrentGame(gameKey);
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steueeereee").getFeedback().isWordValidState());
-        GamePlayService.printCurrentGame(gameKey);
+     //   GamePlayService.printCurrentGame(gameKey);
     }
 /*    @Test
     @DisplayName("Game Init test")

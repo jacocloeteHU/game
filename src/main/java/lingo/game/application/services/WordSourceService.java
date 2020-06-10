@@ -14,9 +14,9 @@ public class WordSourceService {
     public WordSourceService(){
 
     }
-    public Word generateNewWord() throws IOException, URISyntaxException {
+    public Word generateNewWord(int length) throws IOException, URISyntaxException {
         IWordSource wordSource = new ApiWordSource("https://lingo-words.herokuapp.com");
-        Word newWord = wordSource.ReadWord(5);
+        Word newWord = wordSource.ReadWord(length);
         return newWord;
     }
 }
