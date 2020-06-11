@@ -14,8 +14,7 @@ public class GameService implements IGameService {
     GameService(){
     }
     @Override
-    public Game start(Round round) {
-        //RandomStringUtils.randomAlphanumeric(10)
+    public Game create(Round round) {
         Game game = new Game();
         game.start();
         game.setRound(round);
@@ -24,26 +23,19 @@ public class GameService implements IGameService {
     }
 
     public Game findGame(Game game){
-        System.out.println(game+  "" + games);
         int index = games.indexOf(game);
         return games.get(index);
     }
 
- //   @Override
-    //public Game getGame() {
-//        return game;
-  //  }
-
     @Override
-    public Game nextRound(Game game, Round round) {
+    public Game addRound(Game game, Round round) {
         findGame(game).setRound(round);
-
         // add score etc
         return game;
     }
 
-    @Override
-    public void stop() {
-
+    public void stop(Game game) {
+        int index = games.indexOf(game);
+        games.get(index).stop();
     }
 }

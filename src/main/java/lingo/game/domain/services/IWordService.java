@@ -9,9 +9,6 @@ public interface IWordService {
 
     public void addList(ArrayList<Word> words);
 
-//	public void Add(Word word);
-//
-//	public boolean Remove(Word word);
 
     public void clear();
 }

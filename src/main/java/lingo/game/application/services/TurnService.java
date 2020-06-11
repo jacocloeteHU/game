@@ -1,7 +1,7 @@
 package lingo.game.application.services;
 
-import lingo.game.application.gameplay.IFeedbackCreator;
-import lingo.game.application.gameplay.FeedbackCreator;
+import lingo.game.application.factory.IFeedbackFactory;
+import lingo.game.application.factory.FeedbackFactory;
 import lingo.game.domain.model.Feedback;
 import lingo.game.domain.model.Round;
 import lingo.game.domain.model.Word;
@@ -11,18 +11,24 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Date;
 
 @Component
 public class TurnService {
     @Autowired
     IFeedbackService feedbackService;
-    public Round evaluateGuessedWord(Round round, String guessWord, int turnIndex) throws IOException, URISyntaxException {
+    @Autowired
+    IFeedbackFactory feedbackCreator;
+    public Round evaluateGuessedWord(Round round, String guessWord, int turnIndex, Date timeStamp) throws IOException, URISyntaxException {
         Word word = round.getWord();
-        IFeedbackCreator feedbackCreator = new FeedbackCreator();
-        Feedback feedback = feedbackCreator.evolveWord(word, round.getWordPartsIndexes(), guessWord);
+        Feedback feedback;
+        if(!round.getTurns().get(turnIndex).inTime(timeStamp)){
+            feedback = feedbackCreator.invalidFeedback(guessWord);
+        } else {
+            feedback = feedbackCreator.createFeedback(word, round.getWordPartsIndexes(), guessWord);
+            round.setWordPartsIndexes(feedback.getCorrectLettersIndex());
+        }
         round.getTurns().get(turnIndex).setFeedback(feedback);
-      //  round.setFeedback(feedback);
         return round;
-        //  return round.getWord().equals(guessWord);
     }
 }

@@ -1,19 +1,17 @@
 package lingo.game.infrastructure.api;
 
-import lingo.game.application.services.GamePlayService;
 import lingo.game.application.services.IGamePlayService;
 import lingo.game.domain.model.Game;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
+import java.util.Date;
 
 @RestController
 public class GameController {
@@ -23,7 +21,7 @@ public class GameController {
     public ResponseEntity<Game> GetGame() throws IOException, URISyntaxException, JSONException {
       //  JSONObject json = new JSONObject();
         //json.put("path", "/game/" + gamePlayService.startWithRandomWord().getGameKey()+ "/round");
-        return ResponseEntity.ok(gamePlayService.startWithRandomWord());
+        return ResponseEntity.ok(gamePlayService.start());
     }
 
     @GetMapping("/game/{gameKey}/round")
@@ -33,13 +31,19 @@ public class GameController {
 
    @GetMapping("/game/{gameKey}/round/{playerWord}")
     public ResponseEntity<Game> GetGuessRound(@PathVariable String gameKey, @PathVariable String playerWord  ) throws IOException, URISyntaxException {
-       return ResponseEntity.ok(gamePlayService.guessWord(gameKey, playerWord));
+        Date timeStamp = new Date();
+        return ResponseEntity.ok(gamePlayService.guessWord(gameKey, playerWord, timeStamp));
     }
 
     @GetMapping("/game/{gameKey}/round/next")
     public ResponseEntity<Game> GetNextRound(@PathVariable String gameKey) throws IOException, URISyntaxException {
         return ResponseEntity.ok(gamePlayService.nextRound(gameKey));
     }
+
+/*    @GetMapping("/game/{gameKey}/round/save/{playerName}")
+    public ResponseEntity<Game> GetNextRound(@PathVariable String gameKey, @PathVariable String playerName) throws IOException, URISyntaxException {
+        return ResponseEntity.ok(gamePlayService.nextRound(gameKey));
+    }*/
 /*
     @GetMapping("/word")
     public ResponseEntity<Word> GetRandomWord(){

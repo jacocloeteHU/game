@@ -2,6 +2,8 @@ package lingo.game.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Objects;
+
 public class Word {
     private int Length;
     private String Word;
@@ -26,9 +28,9 @@ public class Word {
         return Word;
     }
 
-    public void setWord(String content) {
-        Word = content;
-        Length = content.length();
+    public void setWord(String wordString) {
+        Word = wordString;
+        Length = wordString.length();
     }
 
     @Override
@@ -36,6 +38,17 @@ public class Word {
         return "word [Length=" + Length + ", Word=" + Word + "]";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Word word = (Word) o;
+        return Length == word.Length &&
+                Objects.equals(Word, word.Word);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(Length, Word);
+    }
 }

@@ -17,20 +17,8 @@ public class WordService implements IWordService {
     }
 
     public void addList(ArrayList<Word> words) {
-
         this.WordList.addAll(words);
-/*		for(Word word : words) {
-			this.Add(word);
-		}*/
     }
-
-	/*public void Add(Word word) {
-		this.WordList.add(word);
-	}
-
-	public boolean Remove(Word word) {
-		return this.WordList.remove(word);
-	}*/
 
     public void clear() {
         WordList.clear();

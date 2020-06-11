@@ -11,14 +11,12 @@ public class Game {
     private int score;
 
     public Game() {
-  //      rounds = new ArrayList<Round>();
         wordLength = 5;
         score = 0;
     }
 
     public Game(String gameKey) {
-  //      rounds = new ArrayList<Round>();
-        score = 0;
+        this();
         this.gameKey = gameKey;
     }
 
@@ -36,7 +34,7 @@ public class Game {
     }
 
     public int getWordLength(){
-        return wordLength;
+        return this.wordLength;
     }
 
     public void reset(){
@@ -44,15 +42,15 @@ public class Game {
         this.score = 0;
     }
 
-    private void addWordLength(){
+    public void addWordLength(){
         if(wordLength < 7){
-            wordLength++;
+            this.wordLength += 1;
+        } else {
+            this.wordLength = 5;
         }
-        wordLength = 5;
     }
 
     public void addScore(int turns){
-        addWordLength();
         this.score += (5 - turns) * 10;
     }
 
@@ -67,11 +65,6 @@ public class Game {
     public Round getRound() {
         return round;
     }
-
-/*    public Round getCurrentRound(){
-        int i = rounds.size() - 1;
-        return rounds.get(i);
-    }*/
 
     public int getScore() {
         return score;
@@ -99,9 +92,4 @@ public class Game {
     public int hashCode() {
         return Objects.hash(gameKey);
     }
-
-/*    public void setCurrentRound(Round currentRound) {
-        int i = rounds.size() - 1;
-        rounds.set(i, currentRound);
-    }*/
 }

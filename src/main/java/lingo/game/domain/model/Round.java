@@ -7,7 +7,7 @@ import java.util.Objects;
 
 public class Round {
     @JsonIgnore private Word word;
-    private ArrayList<Integer> wordPartsIndexes = new ArrayList<Integer>();
+    private ArrayList<Integer> correctLetterIndexList = new ArrayList<Integer>();
     private ArrayList<Turn> turns = new ArrayList<Turn>();
     private boolean active;
 
@@ -16,11 +16,19 @@ public class Round {
         this.word = word;
         this.turns.add(turn);
         this.active = true;
-        wordPartsIndexes.add(0);
+        correctLetterIndexList.add(0);
     }
 
     public ArrayList<Turn> getTurns() {
         return turns;
+    }
+
+    public ArrayList<Integer> getCorrectLetterIndexList() {
+        return correctLetterIndexList;
+    }
+
+    public void setCorrectLetterIndexList(ArrayList<Integer> correctLetterIndexList) {
+        this.correctLetterIndexList = correctLetterIndexList;
     }
 
     public void setTurns(ArrayList<Turn> turns) {
@@ -31,10 +39,6 @@ public class Round {
         return active;
     }
 
-/*    public int getTurn() {
-        return turn;
-    }*/
-
     public void addTurn(Turn turn) {
         turns.add(turn);
     }
@@ -44,47 +48,16 @@ public class Round {
     }
 
     public ArrayList<Integer> getWordPartsIndexes() {
-        return wordPartsIndexes;
+        return correctLetterIndexList;
     }
 
     public void setWordPartsIndexes(ArrayList<Integer> wordPartsIndexes) {
         for(int i : wordPartsIndexes){
-      //      int wordPartsIndex = wordPartsIndexes.get(i);
-            if(!this.wordPartsIndexes.contains(i)){
-                this.wordPartsIndexes.add(i);
+            if(!this.correctLetterIndexList.contains(i)){
+                this.correctLetterIndexList.add(i);
             }
         }
     }
-
-    @Override
-    public String toString() {
-        return "Round{" +
-                "word=" + word +
-                ", turns=" + turns +
-                ", active=" + active +
-                '}';
-    }
-
-    /*    public ArrayList<String> getPlayerGuesses() {
-        if(playerGuesses.size() > 0){
-            return playerGuesses;
-        }
-        ArrayList<String> emptyList = new ArrayList<String>();
-        emptyList.add("Null");
-        return emptyList;
-    }*/
-
-/*    public String getPlayerGuessesByIndex(int index) {
-        if (playerGuesses.size() < index) {
-            return playerGuesses.get(index);
-        } else return "Null";
-    }*/
-
-/*
-    public void addPlayerGuesses(String playerGuess) {
-        this.playerGuesses.add(playerGuess);
-    }
-*/
 
     public Word getWord() {
         return word;
@@ -94,79 +67,48 @@ public class Round {
         this.word = word;
     }
 
-    public String getWordParts(){
+    private String getCorrectLetterParts(String placeholder){
         String wordString = word.getWord();
         String guessString = "";
         int count = 0;
         for(char c : wordString.toCharArray()){
-            if(wordPartsIndexes.contains(count) ){
-                guessString += c;
-            }
-            count++;
-        }
-        return guessString;
-    }
-
-    public String getWordPartWithPlaceholder(){
-        String wordString = word.getWord();
-        String guessString = "";
-        int count = 0;
-        for(char c : wordString.toCharArray()){
-            if(wordPartsIndexes.contains(count) ){
+            if(correctLetterIndexList.contains(count) ){
                 guessString += c;
             } else {
-                guessString += "_";
+                guessString += placeholder;
             }
             count++;
         }
         return guessString;
     }
 
-    /*public int getTimer() {
-        return timer;
+    public String getWordParts() {
+        return getCorrectLetterParts("_");
     }
 
-    public void setTimer(int timer) {
-        this.timer = timer;
-    }
-
-
-
-    public void setTurns(int turn) {
-        this.turn = turn;
-    }
-
-    public ArrayList<Feedback> getFeedback() {
-        return feedback;
-    }
-
-    public void setFeedback(Feedback feedback) {
-        this.feedback.add(feedback);
-    }*/
-
-/*    @Override
+    @Override
     public String toString() {
         return "Round{" +
                 "word=" + word +
-                ", timer=" + timer +
-                ", turn=" + turn +
-                ", feedback='" + feedback + '\'' +
+                ", correctLetterIndexList=" + correctLetterIndexList +
+                ", turns=" + turns +
+                ", active=" + active +
                 '}';
-    }*/
+    }
 
-/*    @Override
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Round round = (Round) o;
-        return timer == round.timer &&
-                turn == round.turn &&
+        return active == round.active &&
                 Objects.equals(word, round.word) &&
-                Objects.equals(feedback, round.feedback);
-    }*/
+                Objects.equals(correctLetterIndexList, round.correctLetterIndexList) &&
+                Objects.equals(turns, round.turns);
+    }
 
- /*   @Override
+    @Override
     public int hashCode() {
-        return Objects.hash(word, timer, turn, feedback);
-    }*/
+        return Objects.hash(word, correctLetterIndexList, turns, active);
+    }
 }

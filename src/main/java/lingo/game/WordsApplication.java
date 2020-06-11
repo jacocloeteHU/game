@@ -2,6 +2,7 @@ package lingo.game;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Date;
 
 import lingo.game.application.services.GamePlayService;
 import lingo.game.domain.model.Game;
@@ -13,7 +14,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 
 @SpringBootApplication
@@ -38,11 +38,11 @@ public class WordsApplication implements CommandLineRunner {
         api.readWord(5);
         api.readWords();
         api.readWords(5);
-        Game game = GamePlayService.startWithRandomWord();
+        Game game = GamePlayService.start();
         String gameKey = game.getGameKey();
         System.out.println(gameKey);
       //  GamePlayService.printCurrentGame(gameKey);
-        GamePlayService.guessWord(gameKey,"peanut");
+        GamePlayService.guessWord(gameKey,"peanut", new Date());
       //  GamePlayService.printCurrentGame(gameKey);
     }
 }

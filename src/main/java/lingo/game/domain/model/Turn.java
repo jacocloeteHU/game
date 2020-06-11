@@ -1,6 +1,8 @@
 package lingo.game.domain.model;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 public class Turn {
@@ -8,11 +10,14 @@ public class Turn {
     private String playerInput;
     private Feedback feedback;
     private int turnNumber;
+    private Date timeStamp;
+
     public Turn(int turnNumber, int timer) {
         this.turnNumber = turnNumber;
         this.timer = timer;
         this.playerInput = null;
         this.feedback = null;
+        this.timeStamp = new Date();
     }
 
     public int getTurnNumber() {
@@ -29,6 +34,13 @@ public class Turn {
 
     public void setTimer(int timer) {
         this.timer = timer;
+    }
+
+    public boolean inTime(Date currentTime){
+        long seconds = (currentTime.getTime()-this.timeStamp.getTime())/1000;
+        System.out.println(seconds <= 10);
+        System.out.println(seconds);
+        return seconds <= 10;
     }
 
     public String getPlayerInput() {

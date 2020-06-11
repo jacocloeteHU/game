@@ -14,16 +14,9 @@ public class FeedbackService implements IFeedbackService {
     }
 
     @Override
-    public Feedback getFeedback(Feedback feedback) {
+    public Feedback findFeedback(Feedback feedback) {
         return feedback;
     }
-
-    @Override
-    public void printFeedback(Feedback feedback) {
-        System.out.println(feedback.toString());
-    }
-
-
 
 
 }

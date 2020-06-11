@@ -1,27 +1,28 @@
 package lingo.game.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 
 public class Feedback {
-    private boolean wordValidState;
+    private boolean wordCorrect;
     private ArrayList<String> feedback = new ArrayList<String>();
     private ArrayList<Integer> correctLettersIndex = new ArrayList<Integer>();
-    private int correctCount;
-    public final String CORRECT = "correct";
-    public final String INVALID = "invalid";
-    public final String PRESENT = "present";
-    public final String ABSENT = "absent";
+    @JsonIgnore public final String CORRECT = "correct";
+    @JsonIgnore public final String INVALID = "invalid";
+    @JsonIgnore public final String PRESENT = "present";
+    @JsonIgnore public final String ABSENT = "absent";
 
     public Feedback() {
-        this.wordValidState = false;
+        this.wordCorrect = false;
     }
 
-    public boolean isWordValidState() {
-        return wordValidState;
+    public boolean isWordCorrect() {
+        return wordCorrect;
     }
 
-    public void setWordValidState(boolean wordValidState) {
-        this.wordValidState = wordValidState;
+    public void setWordCorrect(boolean wordCorrect) {
+        this.wordCorrect = wordCorrect;
     }
 
     public Feedback(ArrayList<String> feedback) {
@@ -30,12 +31,7 @@ public class Feedback {
     }
 
     public ArrayList<String> getFeedback() {
-      //  if(feedback.size() > 0){
             return feedback;
-     //   }
-     //   ArrayList<String> emptyList = new ArrayList<String>();
-     //   emptyList.add("Null");
-     //   return emptyList;
     }
 
     private String feedbackType(int type){
@@ -68,18 +64,6 @@ public class Feedback {
     public void addFeedback(char wordChar, String newFeedback){
         feedback.add(wordChar + " "+ newFeedback);
     }
-
-/*    public String getCORRECT() {
-        return CORRECT;
-    }
-
-    public String getINVALID() {
-        return INVALID;
-    }
-
-    public String getABSENT() {
-        return ABSENT;
-    }*/
 
     @Override
     public String toString() {

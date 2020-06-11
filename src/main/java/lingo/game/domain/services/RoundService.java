@@ -16,15 +16,6 @@ public class RoundService implements IRoundService {
 
     }
 
-/*    public Round createRound(int timer, int turns, Word newWord) throws IOException, URISyntaxException {
-        return new Round(newWord, timer);
-    }*/
-
-    @Override
-    public boolean roundStatus() {
-        return false;
-    }
-
     @Override
     public Round createRound(Word word, Turn turn) {
         return new Round(word, turn);
