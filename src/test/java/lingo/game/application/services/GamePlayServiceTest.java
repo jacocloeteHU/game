@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
@@ -21,13 +22,14 @@ public class GamePlayServiceTest {
     private static String gameKey = "";
     @Autowired
     private IGamePlayService GamePlayService;
-
+    
     public GamePlayServiceTest() {
     }
 
-    @Before
+
   //  @Test
-    @DisplayName("Initsialize game")
+    //@DisplayName("Initsialize game")
+    @BeforeEach
     public void initsializeTest() throws IOException, URISyntaxException {
         Word newWord = new Word("steun");
         Game game = GamePlayService.start(newWord);
@@ -35,12 +37,9 @@ public class GamePlayServiceTest {
         Assertions.assertTrue(true);
     }
 
-
-
     @Test
     @DisplayName("to late guesses test")
     public void toLateGuessesTest() throws IOException, URISyntaxException {
-        initsializeTest();
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steur", new Date()).getRound().isActive());
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
@@ -52,7 +51,6 @@ public class GamePlayServiceTest {
     @Test
     @DisplayName("4 guesses test")
     public void fourGuessesTest() throws IOException, URISyntaxException {
-        initsializeTest();
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steur", new Date()).getRound().isActive());
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steuren", new Date()).getRound().isActive());
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steu", new Date()).getRound().isActive());
@@ -61,7 +59,6 @@ public class GamePlayServiceTest {
     @Test
     @DisplayName("Lose test")
     public void playnegativeTest() throws IOException, URISyntaxException {
-        initsializeTest();
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steuren", new Date()).getRound().isActive());
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steu", new Date()).getRound().isActive());
         Assertions.assertTrue(GamePlayService.guessWord(gameKey,"steue", new Date()).getRound().isActive());
@@ -74,7 +71,6 @@ public class GamePlayServiceTest {
     @Test
     @DisplayName("Next Round test")
     public void nextRoundTest() throws IOException, URISyntaxException {
-        initsializeTest();
         Assertions.assertFalse(GamePlayService.guessWord(gameKey,"steun", new Date()).getRound().isActive());
         Game game = GamePlayService.nextRound(gameKey);
         Assertions.assertTrue(game.getRound().isActive());
@@ -85,7 +81,6 @@ public class GamePlayServiceTest {
     @Test
     @DisplayName("Next Round after 5 wrong tries test")
     public void nextRoundAfterLoseTest() throws IOException, URISyntaxException {
-        initsializeTest();
         GamePlayService.guessWord(gameKey,"stuur", new Date());
         GamePlayService.guessWord(gameKey,"stuur", new Date());
         GamePlayService.guessWord(gameKey,"stuur", new Date());
@@ -100,7 +95,6 @@ public class GamePlayServiceTest {
     @Test
     @DisplayName("Get game from memory")
     public void getGameFromMemoryTest() throws IOException, URISyntaxException {
-        initsializeTest();
         Assertions.assertTrue(GamePlayService.getCurrentGame(gameKey).getRound().isActive());
         Assertions.assertTrue(GamePlayService.getCurrentGame(gameKey).getScore() == 0);
    }

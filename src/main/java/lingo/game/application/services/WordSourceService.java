@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 @Service
-public class WordSourceService {
+public class WordSourceService implements IWordSourceService {
 
     public WordSourceService(){
 
