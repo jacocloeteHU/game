@@ -79,7 +79,7 @@ public class Game {
         return "Game{" +
                 "round=" + round +
                 ", active=" + active +
-                ", score=" + score +
+                "   , score=" + score +
                 ", gameKey=" + gameKey +
                 '}';
     }
