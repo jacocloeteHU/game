@@ -36,8 +36,12 @@ repositories {
 publishing {
     repositories {
         maven {
-            name = System.getenv("DISTRIBUTION_NAME")
+            name = "GitHubPackages"
             url = System.getenv("DISTRIBUTION_URL")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
         }
     }
     publications {
