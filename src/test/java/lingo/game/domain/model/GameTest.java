@@ -25,8 +25,9 @@ public class GameTest {
         Game game = new Game();
         game.addScore(3);
         game.addScore(2);
-
+        Game game2 = new Game();
         Assertions.assertEquals(50, game.getScore());
+        Assertions.assertTrue(game.equals(game2));
     }
 
     @Test

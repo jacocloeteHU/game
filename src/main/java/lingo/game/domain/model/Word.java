@@ -33,22 +33,9 @@ public class Word {
         length = wordString.length();
     }
 
-    @Override
     public String toString() {
         return "word [Length=" + length + ", Word=" + word + "]";
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Word word = (Word) o;
-        return length == word.length &&
-                Objects.equals(this.word, word.word);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(length, word);
-    }
 }

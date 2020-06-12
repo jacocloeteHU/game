@@ -24,6 +24,8 @@ public class TurnTest {
         Turn turn    = new Turn(1,10);
         Assertions.assertEquals(1,turn.getTurnNumber());
         Assertions.assertEquals(10,turn.getTimer());
+        Turn turn1    = new Turn(1,10);
+        Assertions.assertTrue( turn.equals(turn1));
     }
 
     @Test

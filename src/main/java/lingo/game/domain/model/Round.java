@@ -95,4 +95,8 @@ public class Round {
                 Objects.equals(turns, round.turns);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(word, correctLetterIndexList, turns, active);
+    }
 }

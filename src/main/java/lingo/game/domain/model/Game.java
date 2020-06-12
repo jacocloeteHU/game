@@ -92,4 +92,8 @@ public class Game {
         return Objects.equals(gameKey, game.gameKey);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(round, active, gameKey, wordLength, score);
+    }
 }

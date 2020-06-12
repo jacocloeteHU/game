@@ -60,4 +60,18 @@ public class Turn {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Turn turn = (Turn) o;
+        return timer == turn.timer &&
+                turnNumber == turn.turnNumber &&
+                Objects.equals(playerInput, turn.playerInput);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(timer, playerInput, turnNumber);
+    }
 }
