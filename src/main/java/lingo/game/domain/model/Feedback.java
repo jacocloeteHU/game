@@ -25,28 +25,8 @@ public class Feedback {
         this.wordCorrect = wordCorrect;
     }
 
-    public Feedback(ArrayList<String> feedback) {
-        this();
-        this.feedback = feedback;
-    }
-
     public ArrayList<String> getFeedback() {
             return feedback;
-    }
-
-    private String feedbackType(int type){
-        switch(type){
-            case 1:
-                return CORRECT;
-            case 2:
-                return PRESENT;
-            case 3:
-                return ABSENT;
-            case 4:
-                return INVALID;
-            default:
-                return INVALID;
-        }
     }
 
     public ArrayList<Integer> getCorrectLettersIndex() {
@@ -55,10 +35,6 @@ public class Feedback {
 
     public void addCorrectLettersIndex(int correctLettersIndex) {
         this.correctLettersIndex.add(correctLettersIndex);
-    }
-
-    public void setFeedback(ArrayList<String> feedback) {
-        this.feedback = feedback;
     }
 
     public void addFeedback(char wordChar, String newFeedback){

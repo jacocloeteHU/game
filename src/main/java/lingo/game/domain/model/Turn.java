@@ -24,16 +24,8 @@ public class Turn {
         return turnNumber;
     }
 
-    public void setTurnNumber(int turnNumber) {
-        this.turnNumber = turnNumber;
-    }
-
     public int getTimer() {
         return timer;
-    }
-
-    public void setTimer(int timer) {
-        this.timer = timer;
     }
 
     public boolean inTime(Date currentTime){
@@ -68,17 +60,4 @@ public class Turn {
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Turn turn = (Turn) o;
-        return Objects.equals(playerInput, turn.playerInput) &&
-                Objects.equals(feedback, turn.feedback);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(playerInput, feedback);
-    }
 }

@@ -1,3 +1,4 @@
+package lingo.game.infrastructure.source;
 
 import lingo.game.domain.model.IWordSource;
 import lingo.game.domain.model.Word;
@@ -11,10 +12,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-public class LingoWordsApiTest {
+public class ApiWordSourceTest {
 
     private final IWordSource api;
-    public LingoWordsApiTest() {
+    public ApiWordSourceTest() {
         api = new ApiWordSource("https://lingo-words.herokuapp.com");
     }
 
@@ -49,10 +50,10 @@ public class LingoWordsApiTest {
     @Test
     @DisplayName("check if word exits testing")
     public void WordPresentAndAbsentTest() throws IOException, URISyntaxException {
-        Assertions.assertEquals(true ,api.checkWord("aanzien"));
-        Assertions.assertEquals(false ,api.checkWord("Aanzien"));
-        Assertions.assertEquals(false,api.checkWord("aanzien1"));
-        Assertions.assertEquals(false ,api.checkWord("aan"));
+        Assertions.assertTrue(api.checkWord("aanzien"));
+        Assertions.assertFalse(api.checkWord("Aanzien"));
+        Assertions.assertFalse(api.checkWord("aanzien1"));
+        Assertions.assertFalse(api.checkWord("aan"));
     }
 
 }

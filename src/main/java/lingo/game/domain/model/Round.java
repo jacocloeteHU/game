@@ -23,18 +23,6 @@ public class Round {
         return turns;
     }
 
-    public ArrayList<Integer> getCorrectLetterIndexList() {
-        return correctLetterIndexList;
-    }
-
-    public void setCorrectLetterIndexList(ArrayList<Integer> correctLetterIndexList) {
-        this.correctLetterIndexList = correctLetterIndexList;
-    }
-
-    public void setTurns(ArrayList<Turn> turns) {
-        this.turns = turns;
-    }
-
     public boolean isActive() {
         return active;
     }
@@ -107,8 +95,4 @@ public class Round {
                 Objects.equals(turns, round.turns);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(word, correctLetterIndexList, turns, active);
-    }
 }

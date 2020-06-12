@@ -50,6 +50,10 @@ public class Game {
         }
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
     public void addScore(int turns){
         this.score += (5 - turns) * 10;
     }
@@ -88,8 +92,4 @@ public class Game {
         return Objects.equals(gameKey, game.gameKey);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(gameKey);
-    }
 }
