@@ -37,7 +37,7 @@ publishing {
     repositories {
         maven {
             name = System.getenv("DISTRIBUTION_NAME")
-            url = uri(System.getenv("DISTRIBUTION_URL"))
+            url = System.getenv("DISTRIBUTION_URL")
         }
     }
     publications {
